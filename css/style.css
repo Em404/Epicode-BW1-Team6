@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap');
+
+#containerBenchmark{
+    background-image: url(../assets/img/bg.jpg);
+    background-position: center;
+    background-size: cover;
+    color: white;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    padding: 40px;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.logo-benchmark img{
+    width: 150px;
+}
+
+.p-bigger{
+    font-size: 60px;
+    font-family: 'Outfit', sans-serif;
+    margin: 80px 0 40px 0;
+    line-height: 0.7;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.purple{
+    color: #D20094;
+    font-size: 1.5em;
+}
+
+ul li{
+    list-style: disc;
+    list-style-position: inside;
+    padding: 4px 0;
+}
+
+.padding-tb{
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+.checkbox-flex{
+    display: flex;
+    align-items: baseline;
+}
+
+.checkbox-bench{
+    display: flex;
+    margin-top: 80px;
+    justify-content: space-between;
+}
+
+.btn-light{
+    background-color: #00FFFF;
+    box-shadow: 0px 0px 17px 6px rgba(0,255,255,0.46);
+    border: none;
+    padding: 10px 30px;
+    font-weight: bold;
+}
+
+.btn-light:hover{
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    background: #990000;    
+}
