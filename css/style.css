@@ -17,6 +17,10 @@
     width: 150px;
 }
 
+.container-welcomepage{
+    max-width: 1200px;
+}
+
 .p-bigger{
     font-size: 60px;
     font-family: 'Outfit', sans-serif;
@@ -39,20 +43,16 @@ ul li{
     padding: 4px 0;
 }
 
-
-
 .padding-tb{
     padding: 20px 0;
     margin-bottom: 30px;
 }
-
 
 .checkbox-bench{
     display: flex;
     margin-top: 80px;
     justify-content: space-between;
 }
-
 
 .checkbox-flex{
     display: flex;
@@ -105,8 +105,6 @@ ul li{
     opacity: 1;
 }
 
-
-
 .btn-light{
     background-color: #00FFFF;
     box-shadow: 0px 0px 17px 6px rgba(0,255,255,0.46);
@@ -117,8 +115,4 @@ ul li{
 
 .btn-light:hover{
     cursor: pointer;
-}
-
-input[type="checkbox"] {
-    background: #990000;    
 }
