@@ -92,13 +92,13 @@ ul li{
 	border-left: 0;
 	border-top: 0;
 	height: 10px;
-	left: 0px;
+	left: 4px;
 	opacity: 0;
 	position: absolute;
-	top: 0px;
+	top: -1px;
 	transform: rotate(45deg);
 	transition: opacity 0.2s ease-in-out;
-	width: 12px;
+	width: 7px;
 }
 
 .checkbox-flex input:checked + label::after{
