@@ -31,7 +31,6 @@ fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy')
 	.then(res => res.json())
 	.then(el => {
 		const arrayQuestions = el.results;
-		console.log(arrayQuestions[0]);
 
 		function getRandom(nQuestions) {
 			const numRandom = Math.floor(Math.random() * nQuestions);
@@ -42,12 +41,26 @@ fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy')
 			const question = document.querySelector('.question > p');
 			const myQuestion = arrayQuestions[getRandom(arrayQuestions.length)];
 			question.innerHTML = myQuestion.question;
-			const divAnswer = document.querySelector('');
+			return myQuestion,printAnswers(myQuestion) ;
+		}
+		
+		function printAnswers(objQuestion) {
+			const arrayAnswers = [];
+			const divAnswersConteiner = document.querySelector('.wrap-answers');
+			
+			arrayAnswers.push(objQuestion.correct_answer);
+			objQuestion.incorrect_answers.forEach(el => {
+				arrayAnswers.push(el);
+			});
+			
+			for (const answr of arrayAnswers) {
+				const divAnswer = document.createElement('div');
+				divAnswer.classList.add('answer');
+				divAnswer.innerHTML = answr;
+				divAnswersConteiner.append(divAnswer);
+			}
 
-
-
-
-			return console.log(myQuestion);
+			return console.log(arrayAnswers);
 		}
 
 		printQuestion(arrayQuestions.length);
