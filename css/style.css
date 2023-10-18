@@ -62,6 +62,11 @@ ul li{
     margin-right: 20px;
 }
 
+.checkbox-flex label{
+ display: block;
+ padding: 2px 0 12px 32px;
+}
+
 .checkbox-flex input{
     height: 4px;
 	left: 0;
@@ -100,9 +105,7 @@ ul li{
     opacity: 1;
 }
 
-#check-welcome-page{
 
-}
 
 .btn-light{
     background-color: #00FFFF;
