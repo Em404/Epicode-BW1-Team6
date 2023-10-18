@@ -41,18 +41,19 @@ fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy')
 			const question = document.querySelector('.question > p');
 			const myQuestion = arrayQuestions[getRandom(arrayQuestions.length)];
 			question.innerHTML = myQuestion.question;
-			return myQuestion,printAnswers(myQuestion) ;
+			return myQuestion, printAnswers(myQuestion);
 		}
-		
+
 		function printAnswers(objQuestion) {
 			const arrayAnswers = [];
 			const divAnswersConteiner = document.querySelector('.wrap-answers');
-			
+
 			arrayAnswers.push(objQuestion.correct_answer);
 			objQuestion.incorrect_answers.forEach(el => {
 				arrayAnswers.push(el);
 			});
-			
+			arrayAnswers.sort();
+
 			for (const answr of arrayAnswers) {
 				const divAnswer = document.createElement('div');
 				divAnswer.classList.add('answer');
@@ -60,8 +61,20 @@ fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy')
 				divAnswersConteiner.append(divAnswer);
 			}
 
+			const answers = document.querySelectorAll('.answer');
+
+			for (const answer of answers) {
+				answer.addEventListener('click', () => {
+					console.log('hello');
+					answer.classList.add('bg');
+				});
+				console.log(answer);
+			}
+
 			return console.log(arrayAnswers);
 		}
+
+
 
 		printQuestion(arrayQuestions.length);
 	});
