@@ -26,6 +26,6 @@ let myDoughnutChart = new Chart(ctx, {
 });
 
 ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-ctx.shadowBlur = 20;
+ctx.shadowBlur = 40;
 ctx.shadowOffsetX = 0;
 ctx.shadowOffsetY = 0;
