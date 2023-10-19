@@ -21,11 +21,10 @@ function runTimer(timerElement) {
       clearInterval(countdownTimer);
       timerElement.classList.remove("animatable");
       triggerNextButton("btn-next");
-      runTimer(timerElement)
+      runTimer(timerElement);
     }
   }, 1000);
 }
-
 
 function resetCountdown() {
   clearInterval(countdownTimer);
@@ -35,7 +34,6 @@ function resetCountdown() {
   timer.innerHTML = timeLeft;
   document.querySelector(".timer").classList.remove("animatable");
 }
-
 
 function triggerNextButton() {
   const button = document.querySelector(".btn-next");
@@ -84,7 +82,6 @@ function printAnswers(objQuestion) {
     divAnswer.innerHTML = answr;
     divAnswersConteiner.append(divAnswer);
   }
-
 }
 
 let countCorrect = 0;
@@ -94,10 +91,10 @@ const checkAnswer = (answerToCheck, correctAnswer) => {
   console.log(correctAnswer);
   if (answerToCheck == correctAnswer) {
     countCorrect += 1;
-    console.log('risposte corrette ', + countCorrect);
+    console.log("risposte corrette ", +countCorrect);
   } else {
     countIncorrect += 1;
-    console.log('risposte sbagliate ', + countIncorrect);
+    console.log("risposte sbagliate ", +countIncorrect);
   }
 };
 
@@ -107,52 +104,60 @@ const getRemainQuestions = (arrayQuestions, oldQuestions) => {
     if (oldQuestions.find((q) => q.question == question.question)) {
       arrayQuestions.splice(index, 1);
     }
-  })
+  });
   return arrayQuestions;
 };
 
 const removeOldAnswers = () => {
   const divAnswersConteiner = document.querySelector(".wrap-answers");
-  divAnswersConteiner.innerHTML = null
-}
+  divAnswersConteiner.innerHTML = null;
+};
 
 // const chagePage = () => {
 //   const btnChange = document.querySelector('#chagePage');
 //   btnChange.style.display = 'block';
 // }
 
+const numberOfQuestion = (questionIncrease) => {
+  const numberOfQuestion = document.querySelector('#number-of-question');
+  numberOfQuestion.innerHTML = `DOMANDA ${questionIncrease} / 10`;
+}
+
 fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
   .then((res) => res.json())
   .then((el) => {
     const arrayQuestions = el.results;
     const oldQuestions = [];
+    let questionIncrease = 1;
     console.log(arrayQuestions);
-    
+
     const myQuestion = printQuestion(arrayQuestions);
     oldQuestions.push(myQuestion);
+    numberOfQuestion(questionIncrease);
     printAnswers(myQuestion);
     console.log(myQuestion);
     const next = document.querySelector(".btn-next");
     next.addEventListener("click", () => {
+
       if (arrayQuestions.length == 1) {
+        next.classList.add('bg1')
+        next.innerHTML = 'INVIA';
+      } if (arrayQuestions.length == 0) {
         window.location.href = '../index.html'
-        
       }
-        checkAnswer(selectedAnswer, myQuestion.correct_answer);
-        
-        const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
-        oldQuestions.push(myNewQuestion);
-        console.log(arrayQuestions);
-        console.log(oldQuestions);
-        removeOldAnswers();
-        printAnswers(myNewQuestion);
+      if (questionIncrease != 10) {
+        questionIncrease ++
       }
+      numberOfQuestion(questionIncrease)
+      checkAnswer(selectedAnswer, myQuestion.correct_answer);
+      // runTimer();
+      const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
+      oldQuestions.push(myNewQuestion);
+      console.log(arrayQuestions);
+      console.log(oldQuestions);
+      removeOldAnswers();
+      printAnswers(myNewQuestion);
 
-
-
-
-      // resetTimerAndRestart()
-      resetCountdown()
-      
+      resetCountdown();
     });
   });
