@@ -134,9 +134,10 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
     console.log(myQuestion);
     const next = document.querySelector(".btn-next");
     next.addEventListener("click", () => {
-      if (arrayQuestions == 0) {
+      if (arrayQuestions.length == 1) {
         window.location.href = '../index.html'
-      } else {
+        
+      }
         checkAnswer(selectedAnswer, myQuestion.correct_answer);
         
         const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
@@ -154,5 +155,4 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
       resetCountdown()
       
     });
-
   });
