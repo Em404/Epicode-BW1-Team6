@@ -1,5 +1,5 @@
-import { countCorrect } from "../../Benchmark Page/benchmark-page";
-import { countIncorrect } from "../../Benchmark Page/benchmark-page";
+import { countCorrect } from "../../Benchmark Page/benchmark-page.js";
+import { countIncorrect } from "../../Benchmark Page/benchmark-page.js";
 
 let wrong2 = document.querySelector('#percentualeWrong');
 let correctTxt = document.querySelector('#percentualeCorrect');

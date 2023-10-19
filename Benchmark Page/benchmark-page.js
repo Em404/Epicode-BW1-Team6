@@ -40,14 +40,13 @@ function triggerNextButton() {
   button.click();
 }
 
-runTimer(document.querySelector(".timer"));
-
 function getRandom(nQuestions) {
   const numRandom = Math.floor(Math.random() * nQuestions);
   return numRandom;
 }
 
 function printQuestion(arrayQuestions) {
+  runTimer(document.querySelector(".timer"));
   const question = document.querySelector(".question > p");
   const index = getRandom(arrayQuestions.length);
   const myQuestion = arrayQuestions[index];
