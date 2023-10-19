@@ -126,35 +126,36 @@ let hard = document.querySelector('#choiceButtonHard');
 let difficulty = 'easy'
 
 
-easy.addEventListener('click', function(){
-  difficulty = 'easy';
-  cloneBenchmarkPage();
-})
-medium.addEventListener('click', function(){
-  difficulty = 'medium';
-  cloneBenchmarkPage();
+// easy.addEventListener('click', function(){
+//   difficulty = 'easy';
+//   cloneBenchmarkPage();
+// })
+// medium.addEventListener('click', function(){
+//   difficulty = 'medium';
+//   cloneBenchmarkPage();
 
-})
-hard.addEventListener('click', function(){
-  difficulty = 'hard';
-  cloneBenchmarkPage();
+// })
+// hard.addEventListener('click', function(){
+//   difficulty = 'hard';
+//   cloneBenchmarkPage();
 
-})
+// })
 
 
-function cloneBenchmarkPage(){
-  // Seleziona il modello
-  const template = document.getElementById("templateBanchmarkPage");
+// function cloneBenchmarkPage(){
+//   // Seleziona il modello
+//   const template = document.getElementById("templateBanchmarkPage");
   
-  // Clona il contenuto del modello
-  const clone = document.importNode(template.content, true);
+//   // Clona il contenuto del modello
+//   const clone = document.importNode(template.content, true);
   
-  // Aggiungi il clone al contenitore desiderato
-  const cloneContainer = document.getElementById("cloneBanchmarkPage");
-  cloneContainer.appendChild(clone);
-}
+//   // Aggiungi il clone al contenitore desiderato
+//   const cloneContainer = document.getElementById("cloneBanchmarkPage");
+//   cloneContainer.appendChild(clone);
+// }
 
 function cloneChoicePage(){
+
   // Seleziona il modello
   const template = document.getElementById("templateChoicePage");
   
@@ -166,7 +167,7 @@ function cloneChoicePage(){
   cloneContainer.appendChild(clone);
 }
 
-cloneChoicePage()
+// cloneChoicePage()
 
 
 
