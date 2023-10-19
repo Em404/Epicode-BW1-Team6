@@ -119,7 +119,61 @@ const removeOldAnswers = () => {
 
 
 
-fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
+let easy = document.querySelector('#choiceButtonEasy');
+let medium = document.querySelector('#choiceButtonMedium');
+let hard = document.querySelector('#choiceButtonHard');
+
+let difficulty = 'easy'
+
+
+easy.addEventListener('click', function(){
+  difficulty = 'easy';
+  cloneBenchmarkPage();
+})
+medium.addEventListener('click', function(){
+  difficulty = 'medium';
+  cloneBenchmarkPage();
+
+})
+hard.addEventListener('click', function(){
+  difficulty = 'hard';
+  cloneBenchmarkPage();
+
+})
+
+
+function cloneBenchmarkPage(){
+  // Seleziona il modello
+  const template = document.getElementById("templateBanchmarkPage");
+  
+  // Clona il contenuto del modello
+  const clone = document.importNode(template.content, true);
+  
+  // Aggiungi il clone al contenitore desiderato
+  const cloneContainer = document.getElementById("cloneBanchmarkPage");
+  cloneContainer.appendChild(clone);
+}
+
+function cloneChoicePage(){
+  // Seleziona il modello
+  const template = document.getElementById("templateChoicePage");
+  
+  // Clona il contenuto del modello
+  const clone = document.importNode(template.content, true);
+  
+  // Aggiungi il clone al contenitore desiderato
+  const cloneContainer = document.getElementById("cloneChoicePage");
+  cloneContainer.appendChild(clone);
+}
+
+cloneChoicePage()
+
+
+
+
+
+
+fetch(`https://opentdb.com/api.php?amount=10&category=18&difficulty=${difficulty}`)
   .then((res) => res.json())
   .then((el) => {
     const arrayQuestions = el.results;
@@ -139,7 +193,7 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
 			removeOldAnswers();
       printAnswers(myNewQuestion);
 
-      // resetTimerAndRestart()
+
       resetCountdown()
       
     });
