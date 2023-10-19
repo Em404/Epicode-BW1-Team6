@@ -11,7 +11,7 @@
         <div class="logo-benchmark">
             <img src="assets/img/epicode_logo.png">
         </div>
-        <div >
+        <div class="container-welcomepage">
             <div class="p-bigger">
                 <p class="">Welcome to </p>
                 <p class=" bold">your exam</p>
@@ -31,17 +31,19 @@
             </div>
             <div class="checkbox-bench">
                 <div class="checkbox-flex">
-                    <input type="checkbox" class="check-welcome-page">
-                    <label>I promise to answer myself without help from anyone</label>
+                    <input type="checkbox" id="check-welcome-page">
+                    <label for = "check-welcome-page">I promise to answer myself without help from anyone</label>
                 </div>
                 <div>
-                    <input type="button" value="PROCEED" id="btnWelcomePage" class="btn-light">
+                    <a href="Benchmark Page/benchmark-page.html">
+                    <input type="button" value="PROCEED" id="btnWelcomePage" class="btn-light" disabled="true">
+                </a>
                 </div>
             </div>
 
         </div>
     </div>
 
-    
+    <script src="welcomePagejs/script.js"></script>
 </body>
 </html>
