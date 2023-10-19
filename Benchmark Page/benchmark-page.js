@@ -27,81 +27,97 @@ function runTimer(timerElement) {
 
 runTimer(document.querySelector(".timer"));
 
+function getRandom(nQuestions) {
+  const numRandom = Math.floor(Math.random() * nQuestions);
+  return numRandom;
+}
+
+function printQuestion(arrayQuestions) {
+  const question = document.querySelector(".question > p");
+  const index = getRandom(arrayQuestions.length);
+  const myQuestion = arrayQuestions[index];
+  question.innerHTML = myQuestion.question;
+
+  return myQuestion;
+}
+
+let selectedAnswer = "";
+
+function printAnswers(objQuestion) {
+  const arrayAnswers = [];
+  const divAnswersConteiner = document.querySelector(".wrap-answers");
+
+  arrayAnswers.push(objQuestion.correct_answer);
+  objQuestion.incorrect_answers.forEach((el) => {
+    arrayAnswers.push(el);
+  });
+  arrayAnswers.sort();
+
+  for (const answr of arrayAnswers) {
+    const divAnswer = document.createElement("div");
+    divAnswer.classList.add("answer");
+
+    divAnswer.addEventListener("click", () => {
+      document.querySelectorAll(".answer").forEach((a) => a.classList.remove("bg"));
+      divAnswer.classList.add("bg");
+      console.log(divAnswer.textContent);
+      selectedAnswer = divAnswer.textContent;
+    });
+
+    divAnswer.innerHTML = answr;
+    divAnswersConteiner.append(divAnswer);
+  }
+
+}
+
+let countCorrect = 0;
+let countIncorrect = 0;
+
+const checkAnswer = (answerToCheck, correctAnswer) => {
+  console.log(correctAnswer);
+  if (answerToCheck == correctAnswer) {
+    countCorrect += 1;
+		console.log('risposte corrette ', + countCorrect);
+  } else {
+    countIncorrect += 1;
+		console.log('risposte sbagliate ', + countIncorrect);
+  }
+};
+
+const getRemainQuestions = (arrayQuestions, oldQuestions) => {
+  const newArrayQuestions = [...arrayQuestions];
+  arrayQuestions.map((question) => {
+    const index = arrayQuestions.indexOf(question);
+    if (oldQuestions.find((q) => q.question == question.question)) {
+      newArrayQuestions.splice(index, 1);
+    }
+  });
+  return newArrayQuestions;
+};
+
+const removeOldAnswers = () => {
+	const divAnswersConteiner = document.querySelector(".wrap-answers");
+	divAnswersConteiner.innerHTML = null
+}
+
 fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
   .then((res) => res.json())
   .then((el) => {
     const arrayQuestions = el.results;
+    const oldQuestions = [];
+    console.log(arrayQuestions);
 
-    function getRandom(nQuestions) {
-      const numRandom = Math.floor(Math.random() * nQuestions);
-      return numRandom;
-    }
-
-    function printQuestion(nQuestions) {
-      const question = document.querySelector(".question > p");
-			const index = getRandom(arrayQuestions.length);
-      const myQuestion = arrayQuestions[index];
-      question.innerHTML = myQuestion.question;
-			arrayQuestions.splice(index, 1);
-      return myQuestion, printAnswers(myQuestion);
-    }
-
-    function printAnswers(objQuestion) {
-      const arrayAnswers = [];
-      const divAnswersConteiner = document.querySelector(".wrap-answers");
-
-      arrayAnswers.push(objQuestion.correct_answer);
-      objQuestion.incorrect_answers.forEach((el) => {
-        arrayAnswers.push(el);
-      });
-      arrayAnswers.sort();
-
-      for (const answr of arrayAnswers) {
-        const divAnswer = document.createElement("div");
-        divAnswer.classList.add("answer");
-        divAnswer.innerHTML = answr;
-        divAnswersConteiner.append(divAnswer);
-      }
-
-			selectAnswer(objQuestion);
-
-      // return console.log(objQuestion);
-    }
-
-		const selectAnswer = (obj) => {
-			const answers = document.querySelectorAll(".answer");
-      for (const answer of answers) {
-        answer.addEventListener("click", () => {
-          answers.forEach((a) => a.classList.remove("bg"));
-          answer.classList.add("bg");
-					console.log(answer.textContent);
-					const selectedAnswer = answer.textContent
-
-					checkAnswer(selectedAnswer, obj);
-
-					// return selectedAnswer
-        });
-      }
-		}
-
-		let countCorrect = 0;
-		let countIncorrect = 0;
-
-		const checkAnswer = (answerToCheck, obj) => {
-			const correctAnswer = obj.correct_answer
-			console.log(correctAnswer);
-			if(answerToCheck == correctAnswer) {
-				countCorrect +=1
-			} else {
-				countIncorrect += 1
-			}
-		}
-
-		const next = document.querySelector('.btn-next')
-		next.addEventListener("click", () => {
-			checkAnswer();
-		})
-
-    printQuestion(arrayQuestions.length);
+    const myQuestion = printQuestion(arrayQuestions);
+    oldQuestions.push(myQuestion);
+    printAnswers(myQuestion);
+    console.log(myQuestion);
+    const next = document.querySelector(".btn-next");
+    next.addEventListener("click", () => {
+      checkAnswer(selectedAnswer, myQuestion.correct_answer);
+      // runTimer();
+      const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
+      oldQuestions.push(myNewQuestion);
+			removeOldAnswers();
+      printAnswers(myNewQuestion);
+    });
   });
-
