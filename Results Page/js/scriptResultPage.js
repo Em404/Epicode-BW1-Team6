@@ -1,3 +1,6 @@
+import { countCorrect } from "../../Benchmark Page/benchmark-page";
+import { countIncorrect } from "../../Benchmark Page/benchmark-page";
+
 let wrong2 = document.querySelector('#percentualeWrong');
 let correctTxt = document.querySelector('#percentualeCorrect');
 let txtNumber = correctTxt.textContent;

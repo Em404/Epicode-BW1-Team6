@@ -86,6 +86,7 @@ function printAnswers(objQuestion) {
 
 let countCorrect = 0;
 let countIncorrect = 0;
+export { countCorrect, countIncorrect };
 
 const checkAnswer = (answerToCheck, correctAnswer) => {
   console.log(correctAnswer);
@@ -97,6 +98,8 @@ const checkAnswer = (answerToCheck, correctAnswer) => {
     console.log("risposte sbagliate ", +countIncorrect);
   }
 };
+
+
 
 const getRemainQuestions = (arrayQuestions, oldQuestions) => {
   arrayQuestions.map((question) => {
@@ -143,7 +146,7 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
         next.classList.add('bg1')
         next.innerHTML = 'INVIA';
       } if (arrayQuestions.length == 0) {
-        window.location.href = '../index.html'
+        window.location.href = '../Results Page/resultPage.html'
       }
       if (questionIncrease != 10) {
         questionIncrease ++
