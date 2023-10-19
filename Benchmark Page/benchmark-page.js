@@ -1,5 +1,6 @@
 let timeLeft = 60;
 let timer = document.getElementById("timeLeft");
+let countdownTimer = 0;
 
 function isTimeLeft() {
   return timeLeft > -1;
@@ -14,15 +15,31 @@ function runTimer(timerElement) {
     if (isTimeLeft()) {
       const timeRemaining = timeLeft--;
       const normalizedTime = (60 - timeRemaining) / 60;
-      // for clockwise animation
-      // const normalizedTime = (timeRemaining - 60) / 60;
       timerCircle.style.strokeDashoffset = normalizedTime;
       timer.innerHTML = timeRemaining;
     } else {
       clearInterval(countdownTimer);
       timerElement.classList.remove("animatable");
+      triggerNextButton("btn-next");
+      runTimer(timerElement)
     }
   }, 1000);
+}
+
+
+function resetCountdown() {
+  clearInterval(countdownTimer);
+  timeLeft = 60;
+  const timerCircle = document.querySelector(".timer svg > circle + circle");
+  timerCircle.style.strokeDashoffset = 1;
+  timer.innerHTML = timeLeft;
+  document.querySelector(".timer").classList.remove("animatable");
+}
+
+
+function triggerNextButton() {
+  const button = document.querySelector(".btn-next");
+  button.click();
 }
 
 runTimer(document.querySelector(".timer"));
@@ -100,13 +117,15 @@ const removeOldAnswers = () => {
 	divAnswersConteiner.innerHTML = null
 }
 
+
+
 fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
   .then((res) => res.json())
   .then((el) => {
     const arrayQuestions = el.results;
     const oldQuestions = [];
     console.log(arrayQuestions);
-
+    
     const myQuestion = printQuestion(arrayQuestions);
     oldQuestions.push(myQuestion);
     printAnswers(myQuestion);
@@ -114,10 +133,14 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
     const next = document.querySelector(".btn-next");
     next.addEventListener("click", () => {
       checkAnswer(selectedAnswer, myQuestion.correct_answer);
-      // runTimer();
+      
       const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
       oldQuestions.push(myNewQuestion);
 			removeOldAnswers();
       printAnswers(myNewQuestion);
+
+      // resetTimerAndRestart()
+      resetCountdown()
+      
     });
   });
