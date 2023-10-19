@@ -77,30 +77,34 @@ const checkAnswer = (answerToCheck, correctAnswer) => {
   console.log(correctAnswer);
   if (answerToCheck == correctAnswer) {
     countCorrect += 1;
-		console.log('risposte corrette ', + countCorrect);
+    console.log('risposte corrette ', + countCorrect);
   } else {
     countIncorrect += 1;
-		console.log('risposte sbagliate ', + countIncorrect);
+    console.log('risposte sbagliate ', + countIncorrect);
   }
 };
 
 const getRemainQuestions = (arrayQuestions, oldQuestions) => {
-  const newArrayQuestions = [...arrayQuestions];
   arrayQuestions.map((question) => {
     const index = arrayQuestions.indexOf(question);
     if (oldQuestions.find((q) => q.question == question.question)) {
-      newArrayQuestions.splice(index, 1);
+      arrayQuestions.splice(index, 1);
     }
-  });
-  return newArrayQuestions;
+  })
+  return arrayQuestions;
 };
 
 const removeOldAnswers = () => {
-	const divAnswersConteiner = document.querySelector(".wrap-answers");
-	divAnswersConteiner.innerHTML = null
+  const divAnswersConteiner = document.querySelector(".wrap-answers");
+  divAnswersConteiner.innerHTML = null
 }
 
-fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
+// const chagePage = () => {
+//   const btnChange = document.querySelector('#chagePage');
+//   btnChange.style.display = 'block';
+// }
+
+fetch("https://opentdb.com/api.php?amount=2&category=18&difficulty=easy")
   .then((res) => res.json())
   .then((el) => {
     const arrayQuestions = el.results;
@@ -113,11 +117,21 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
     console.log(myQuestion);
     const next = document.querySelector(".btn-next");
     next.addEventListener("click", () => {
-      checkAnswer(selectedAnswer, myQuestion.correct_answer);
-      // runTimer();
-      const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
-      oldQuestions.push(myNewQuestion);
-			removeOldAnswers();
-      printAnswers(myNewQuestion);
+      if (arrayQuestions == 0) {
+        window.location.href = '../index.html'
+      } else {
+        checkAnswer(selectedAnswer, myQuestion.correct_answer);
+        // runTimer();
+        const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
+        oldQuestions.push(myNewQuestion);
+        console.log(arrayQuestions);
+        console.log(oldQuestions);
+        removeOldAnswers();
+        printAnswers(myNewQuestion);
+      }
+
+
+
     });
+
   });
