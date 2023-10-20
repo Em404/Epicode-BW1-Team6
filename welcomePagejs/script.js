@@ -150,6 +150,8 @@ function initBenchmark() {
     }
   };
 
+  
+
   const getRemainQuestions = (arrayQuestions, oldQuestions) => {
     arrayQuestions.map((question) => {
       const index = arrayQuestions.indexOf(question);
@@ -164,11 +166,6 @@ function initBenchmark() {
     const divAnswersConteiner = document.querySelector(".wrap-answers");
     divAnswersConteiner.innerHTML = null;
   };
-
-  // const chagePage = () => {
-  //   const btnChange = document.querySelector('#chagePage');
-  //   btnChange.style.display = 'block';
-  // }
 
   const numberOfQuestion = (questionIncrease) => {
     const numberOfQuestion = document.querySelector("#number-of-question");
@@ -307,4 +304,12 @@ function initFeedback() {
       });
     });
   });
+
+  const input = document.getElementById("input-feedback")
+  input.addEventListener("keydown", (event) => {
+    if(event.key === "Enter"){
+      event.preventDefault();
+    }
+  })
+
 }
