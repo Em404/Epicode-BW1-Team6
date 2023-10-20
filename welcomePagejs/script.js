@@ -1,12 +1,9 @@
 function cloneWelcomePage() {
-  // Seleziona il modello
   const template = document.getElementsByTagName("template")[0].content;
 
-  // Clona il contenuto del modello
   const clone = template.cloneNode(true);
 
-  // Aggiungi il clone al contenitore desiderato
-  const cloneContainer = document.getElementById("clone-Welcome-Page");
+  const cloneContainer = document.getElementById("clone-Welcome-Page"); 
   cloneContainer.appendChild(clone);
 
   initCheckbox();
@@ -18,13 +15,10 @@ function cloneBenchmarkPage() {
   const wrap = document.getElementById("wrap-WelcomePage");
   wrap.innerHTML = "";
 
-  // Seleziona il modello
   const template = document.getElementsByTagName("template")[1].content;
 
-  // Clona il contenuto del modello
   const clone = template.cloneNode(true);
 
-  // Aggiungi il clone al contenitore desiderato
   const cloneContainer = document.getElementById("clone-Benchmark-Page");
   cloneContainer.appendChild(clone);
 
@@ -113,6 +107,8 @@ function initBenchmark() {
   function printAnswers(objQuestion) {
     const arrayAnswers = [];
     const divAnswersConteiner = document.querySelector(".wrap-answers");
+    const next = document.querySelector(".btn-next");
+
 
     arrayAnswers.push(objQuestion.correct_answer);
     objQuestion.incorrect_answers.forEach((el) => {
@@ -127,9 +123,9 @@ function initBenchmark() {
       divAnswer.addEventListener("click", () => {
         document.querySelectorAll(".answer").forEach((a) => a.classList.remove("bg"));
         divAnswer.classList.add("bg");
-        console.log(divAnswer.textContent);
+        next.classList.add('bg1');
         selectedAnswer = divAnswer.textContent;
-      });
+      })
 
       divAnswer.innerHTML = answr;
       divAnswersConteiner.append(divAnswer);
@@ -139,14 +135,10 @@ function initBenchmark() {
   let countCorrect = 0;
 
   const checkAnswer = (answerToCheck, correctAnswer) => {
-    console.log(correctAnswer);
     if (answerToCheck == correctAnswer) {
       countCorrect += 1;
-      console.log("risposte corrette ", +countCorrect);
     }
   };
-
-  
 
   const getRemainQuestions = (arrayQuestions, oldQuestions) => {
     arrayQuestions.map((question) => {
@@ -174,13 +166,11 @@ function initBenchmark() {
       const arrayQuestions = el.results;
       const oldQuestions = [];
       let questionIncrease = 1;
-      console.log(arrayQuestions);
 
       const myQuestion = printQuestion(arrayQuestions);
       oldQuestions.push(myQuestion);
       numberOfQuestion(questionIncrease);
       printAnswers(myQuestion);
-      console.log(myQuestion);
       const next = document.querySelector(".btn-next");
       next.addEventListener("click", () => {
         if (arrayQuestions.length == 1) {
@@ -195,11 +185,8 @@ function initBenchmark() {
         }
         numberOfQuestion(questionIncrease);
         checkAnswer(selectedAnswer, myQuestion.correct_answer);
-        // runTimer();
         const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
         oldQuestions.push(myNewQuestion);
-        console.log(arrayQuestions);
-        console.log(oldQuestions);
         removeOldAnswers();
         printAnswers(myNewQuestion);
 
@@ -212,13 +199,10 @@ function cloneResultPage(myCount) {
   const wrap = document.getElementById("wrap-Benchmark-Page");
   wrap.innerHTML = "";
 
-  // Seleziona il modello
   const template = document.getElementsByTagName("template")[2].content;
 
-  // Clona il contenuto del modello
   const clone = template.cloneNode(true);
 
-  // Aggiungi il clone al contenitore desiderato
   const cloneContainer = document.getElementById("clone-Result-Page");
   cloneContainer.appendChild(clone);
 
@@ -229,10 +213,6 @@ function initResult(myCount) {
 
   let wrong2 = document.querySelector("#percentualeWrong");
   let correct2 = document.querySelector("#percentualeCorrect");
-  // let txtNumber = correctTxt.textContent;
-  // let correctD = parseFloat(txtNumber);
-  // let correct2 = correctD.toFixed(2);
-
 
   let correct = myCount * 10;
 
@@ -280,13 +260,10 @@ function cloneFeedbackPage() {
   const wrap = document.getElementById("wrap-Result-Page");
   wrap.innerHTML = "";
 
-  // Seleziona il modello
   const template = document.getElementsByTagName("template")[3].content;
 
-  // Clona il contenuto del modello
   const clone = template.cloneNode(true);
 
-  // Aggiungi il clone al contenitore desiderato
   const cloneContainer = document.getElementById("clone-feedbackpage");
   cloneContainer.appendChild(clone);
 

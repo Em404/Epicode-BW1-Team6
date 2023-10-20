@@ -74,7 +74,7 @@ function printAnswers(objQuestion) {
     divAnswer.addEventListener("click", () => {
       document.querySelectorAll(".answer").forEach((a) => a.classList.remove("bg"));
       divAnswer.classList.add("bg");
-      console.log(divAnswer.textContent);
+      (divAnswer.textContent);
       selectedAnswer = divAnswer.textContent;
     });
 
@@ -88,13 +88,10 @@ let countIncorrect = 0;
 export { countCorrect, countIncorrect };
 
 const checkAnswer = (answerToCheck, correctAnswer) => {
-  console.log(correctAnswer);
   if (answerToCheck == correctAnswer) {
     countCorrect += 1;
-    console.log("risposte corrette ", +countCorrect);
   } else {
     countIncorrect += 1;
-    console.log("risposte sbagliate ", +countIncorrect);
   }
 };
 
@@ -131,13 +128,11 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
     const arrayQuestions = el.results;
     const oldQuestions = [];
     let questionIncrease = 1;
-    console.log(arrayQuestions);
 
     const myQuestion = printQuestion(arrayQuestions);
     oldQuestions.push(myQuestion);
     numberOfQuestion(questionIncrease);
     printAnswers(myQuestion);
-    console.log(myQuestion);
     const next = document.querySelector(".btn-next");
     next.addEventListener("click", () => {
 
@@ -155,8 +150,6 @@ fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy")
       // runTimer();
       const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
       oldQuestions.push(myNewQuestion);
-      console.log(arrayQuestions);
-      console.log(oldQuestions);
       removeOldAnswers();
       printAnswers(myNewQuestion);
 

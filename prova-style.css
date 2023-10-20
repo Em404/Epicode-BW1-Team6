@@ -6,7 +6,7 @@ html {
     height: 100%;
 }
 
-.btnLight:hover{
+.btn-light:hover{
     cursor: pointer;
 }
 
@@ -74,10 +74,24 @@ ul li {
     box-shadow: 0px 0px 17px 6px rgba(0, 255, 255, 0.46);
     border: none;
     padding: 10px 30px;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 /* --------------------------------- WELCOME PAGE -------------------------------------- */
+
+.checkbox-bench {
+    display: flex;
+    margin-top: 80px;
+    justify-content: space-between;
+}
+
+.checkbox-flex {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    position: relative;
+    margin-right: 20px;
+}
 
 .checkbox-flex label {
     display: block;
@@ -179,12 +193,6 @@ ul li {
 
 /* -----------------------------------DINAMICLY QUIZ----------------------------------- */
 
-.bg1 {
-    background-color: #00FFFF;
-    box-shadow: 0px 0px 17px 6px rgba(0, 255, 255, 0.46);
-    color: black;
-}
-
 .question {
     display: flex;
     justify-content: center;
@@ -212,6 +220,10 @@ ul li {
     background: rgba(255, 255, 255, 0.1);
     margin-bottom: 30px;
     font-weight: bold;
+}
+
+.answer:hover, .btn-next:hover {
+    cursor: pointer;
 }
 
 .status-footer {
@@ -339,7 +351,7 @@ ul li {
     text-decoration: none;
 }
 
-#containerbuttonRateUs a:hover {
+#buttonRateUs:hover {
     background-color: #00FFFF;
     box-shadow: 0px 0px 17px 6px rgba(0, 255, 255, 0.46);
 }
@@ -386,56 +398,12 @@ fill: #0B113B;
 fill: #00FFFF;
 }
 
-
-/* --------------------------------- CLASS IN DUEDE --------------------------------- */
-
-input[type="checkbox"] {
-    background: #990000;
-}
-
 .bg {
-    color: red;
-}
-/* BISOGNA SOLTANTO CAMBIARGLI IL NOME SU FEEDBACK.HTML */
-.btnLight{
-    background-color: #00FFFF;
-    box-shadow: 0px 0px 17px 6px rgba(0,255,255,0.46);
-    border: none;
-    padding: 10px 30px;
-    font-weight: bold;
+    box-shadow: 0px 0px 8px 4px #D20094;
+    background-color: #D20094 ;
 }
 
-#chagePage {
-    display: none;
-}
-
-/*  */
-.checkbox-bench {
-    display: flex;
-    margin-top: 80px;
-    justify-content: space-between;
-}
-
-.checkboxBench {
-    display: flex;
-    margin-top: 80px;
-    justify-content: space-between;
-}
-
-/* LE DUE CLASSI VANNO MODIFICATI I NOMI  CAMBIARE SU RESULT.HTML*/
-
-
-.checkboxFlex {
-    display: flex;
-    align-items: baseline;
-}
-
-/* QUESTE CLASSI SI RIPETONO E NON INCLUDONO TUTTE LE CARATTERISTICHE */
-
-.checkbox-flex {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    position: relative;
-    margin-right: 20px;
+.bg1 {
+    box-shadow: 0px 0px 17px 6px rgba(0, 255, 255, 0.46);
+    color: white;
 }
