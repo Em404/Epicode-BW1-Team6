@@ -172,6 +172,7 @@ function initBenchmark() {
     .then((res) => res.json())
     .then((el) => {
       const arrayQuestions = el.results;
+      let arrayQuestionsLenght = arrayQuestions.length;
       const oldQuestions = [];
       let questionIncrease = 1;
       console.log(arrayQuestions);
@@ -195,7 +196,7 @@ function initBenchmark() {
         }
         numberOfQuestion(questionIncrease);
         checkAnswer(selectedAnswer, myQuestion.correct_answer);
-        // runTimer();
+        
         const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
         oldQuestions.push(myNewQuestion);
         console.log(arrayQuestions);
@@ -204,11 +205,14 @@ function initBenchmark() {
         printAnswers(myNewQuestion);
 
         resetCountdown();
+        return arrayQuestionsLenght
+
       });
     });
 }
 
-function cloneResultPage(myCount) {
+
+function cloneResultPage(myCount, arrayQuestionsLenght) {
   const wrap = document.getElementById("wrap-Benchmark-Page");
   wrap.innerHTML = "";
 
@@ -222,10 +226,10 @@ function cloneResultPage(myCount) {
   const cloneContainer = document.getElementById("clone-Result-Page");
   cloneContainer.appendChild(clone);
 
-  initResult(myCount);
+  initResult(myCount, arrayQuestionsLenght);
 }
 
-function initResult(myCount) {
+function initResult(myCount, arrayQuestionsLenght) {
 
   let wrong2 = document.querySelector("#percentualeWrong");
   let correct2 = document.querySelector("#percentualeCorrect");
@@ -274,6 +278,23 @@ function initResult(myCount) {
   btnRateUs.addEventListener("click", () => {
     cloneFeedbackPage();
   });
+
+
+  if (correct < 60) {
+    let congr = document.querySelector('.congr');
+    let subtitleCircle = document.querySelector('.subtitleCircle');
+    let circleTxt = document.querySelector('#circleTxt');
+    congr.innerHTML = `I'm sorry`
+    subtitleCircle.innerHTML = `You not passed the exam.`
+    circleTxt.innerHTML = `try again, you'll be luckier`
+  }
+
+  let sottotestoCorrect = document.querySelector('#sottotestoCorrect');
+  let sottotestoWrong = document.querySelector('#sottotestoWrong');
+  let wrongPerc = 10 - myCount;
+  sottotestoCorrect.innerHTML = `${myCount}/10`;
+  sottotestoWrong.innerHTML = `${wrongPerc}/10`;
+
 }
 
 function cloneFeedbackPage() {
