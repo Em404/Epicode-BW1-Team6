@@ -172,6 +172,7 @@ function initBenchmark() {
       oldQuestions.push(myQuestion);
       numberOfQuestion(questionIncrease);
       printAnswers(myQuestion);
+      checkAnswer(selectedAnswer, myQuestion.correct_answer);
       const next = document.querySelector(".btn-next");
       next.addEventListener("click", () => {
         if (arrayQuestions.length == 1) {
@@ -185,12 +186,14 @@ function initBenchmark() {
           questionIncrease++;
         }
         numberOfQuestion(questionIncrease);
-        checkAnswer(selectedAnswer, myQuestion.correct_answer);
-        
+
         const myNewQuestion = printQuestion(getRemainQuestions(arrayQuestions, oldQuestions));
         oldQuestions.push(myNewQuestion);
         removeOldAnswers();
         printAnswers(myNewQuestion);
+        checkAnswer(selectedAnswer, myNewQuestion.correct_answer);
+        console.log(myNewQuestion.correct_answer);
+        
 
         resetCountdown();
         return arrayQuestionsLenght
