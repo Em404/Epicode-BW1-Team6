@@ -137,16 +137,12 @@ function initBenchmark() {
   }
 
   let countCorrect = 0;
-  let countIncorrect = 0;
 
   const checkAnswer = (answerToCheck, correctAnswer) => {
     console.log(correctAnswer);
     if (answerToCheck == correctAnswer) {
       countCorrect += 1;
       console.log("risposte corrette ", +countCorrect);
-    } else {
-      countIncorrect += 1;
-      console.log("risposte sbagliate ", +countIncorrect);
     }
   };
 
@@ -192,7 +188,7 @@ function initBenchmark() {
           next.innerHTML = "INVIA";
         }
         if (arrayQuestions.length == 0) {
-          cloneResultPage();
+          cloneResultPage(countCorrect);
         }
         if (questionIncrease != 10) {
           questionIncrease++;
@@ -212,7 +208,7 @@ function initBenchmark() {
     });
 }
 
-function cloneResultPage() {
+function cloneResultPage(myCount) {
   const wrap = document.getElementById("wrap-Benchmark-Page");
   wrap.innerHTML = "";
 
@@ -226,23 +222,25 @@ function cloneResultPage() {
   const cloneContainer = document.getElementById("clone-Result-Page");
   cloneContainer.appendChild(clone);
 
-  initResult();
+  initResult(myCount);
 }
 
-function initResult() {
-  let wrong2 = document.querySelector("#percentualeWrong");
-  let correctTxt = document.querySelector("#percentualeCorrect");
-  let txtNumber = correctTxt.textContent;
-  let correctD = parseFloat(txtNumber);
-  let correct2 = correctD.toFixed(2);
+function initResult(myCount) {
 
-  let correct = correct2;
+  let wrong2 = document.querySelector("#percentualeWrong");
+  let correct2 = document.querySelector("#percentualeCorrect");
+  // let txtNumber = correctTxt.textContent;
+  // let correctD = parseFloat(txtNumber);
+  // let correct2 = correctD.toFixed(2);
+
+
+  let correct = myCount * 10;
 
   let wrong = 100 - correct;
 
-  let data = [wrong, correct2];
+  let data = [wrong, correct];
 
-  let labels = ["Wrong", "correct2"];
+  let labels = ["Wrong", "correct"];
 
   let colors = ["#D20094", "#00FFFF"];
   let borderColor = ["#D20094", "#00FFFF"];
@@ -265,6 +263,7 @@ function initResult() {
     },
   });
   wrong2.textContent = wrong.toFixed(1);
+  correct2.textContent = correct.toFixed(1);
 
   ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
   ctx.shadowBlur = 40;
