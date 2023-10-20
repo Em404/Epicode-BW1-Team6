@@ -305,8 +305,11 @@ function initFeedback() {
   });
 
   const input = document.getElementById("input-feedback")
+
+
   input.addEventListener("keydown", (event) => {
-    if(event.key === "Enter"){
+      if(event.key === "Enter"){
+      input.value = ''
       event.preventDefault();
     }
   })
