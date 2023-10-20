@@ -16,7 +16,7 @@ function cloneWelcomePage(){
   }
 
 
-  cloneWelcomePage();
+//   cloneWelcomePage();
 
   function initCheckbox() {   
       
